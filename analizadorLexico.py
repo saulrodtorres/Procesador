@@ -2,9 +2,25 @@
 #key = tupla | value = tupla --> {(estado, caracter): (estado, accion), ...}
 
 class Lexico:
-	def __init__(self,p_inputFile):
+	MT = {(0,0): (1,L), (0,1): (2,L)}
+	
+	def __init__(self, p_inputFile):
 		self.file = open(p_inputFile, 'r')
 		#self.tokensFile = open('fichero_tokens.txt', 'a')
+
+	def filter(c):
+		#Vamos a mirar que caracter recibe para entrar en la MT
+		if c == '=':
+			return 0
+		elif c == '!':
+			return 1
+		elif c == '|':
+			return 2
+		elif c == '+':
+			return 3
+		elif c.isdigit():
+			return 4
+		elif c
 		
 	def getToken():
 		estado = 0
