@@ -20,8 +20,37 @@ class Lexico:
 			return 3
 		elif c.isdigit():
 			return 4
-		elif c
-		
+		elif c == '"':
+			return 5
+		elif c.isalpha():
+			return 6
+		elif c == '/':
+			return 7
+		elif c == '(':
+			return 8
+		elif c == ')':
+			return 9
+		elif c == '{':
+			return 10
+		elif c == '}':
+			return 11
+		elif c == ';':
+			return 12
+		elif c == ',':
+			return 13
+		elif c == '-':
+			return 14
+		elif c == None:
+			return 15
+		elif c == '':
+			return 16
+		elif c.isalnum:
+			return 18
+		elif c == '_':
+			return 19
+		elif c == '\t' or c == ' ':
+			return 17
+
 	def getToken():
 		estado = 0
 		while estado < 10:
