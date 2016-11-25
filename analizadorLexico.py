@@ -3,7 +3,7 @@ class Lexico:
 
 	MT = {	# Estado 0
 		(0,0):(1,"L"), (0,1):(2,"L"), (0,2):(3,"L"), (0,3):(4,"L"), 
-		(0,4):(5,"A"), (0,5):(6,"L"), (0,6):(7,"F"), (0,7):(8,"L"),
+		(0,4):(5,"A"), (0,5):(6,"J"), (0,6):(7,"H"), (0,7):(8,"L"),
 		(0,8):(10,"G6"), (0,9):(11,"G7"), (0,10):(12,"G14"), 
 		(0,11):(13,"G15"), (0,12):(14,"G4"), (0,13):(15,"G3"),
 		(0,14):(16,"G5"), (0,15):(26,"G2"), (0,16):(27,"G1"), 
@@ -48,13 +48,12 @@ class Lexico:
 		(5,14):(23,"C"), (5,15):(23,"C"), (5,16):(23,"C"),
 		(5,17):(23,"C"), (5,18):(23,"C"), (5,19):(23,"C"),
 		# Estado 6
-		(6,0):(None,"Err"), (6,1):(None,"Err"), (6,2):(None,"Err"),
-		(6,3):(None,"Err"), (6,4):(None,"Err"),	(6,5):(24,"E"),
-		(6,6):(None,"Err"), (6,7):(None,"Err"), (6,8):(None,"Err"),
-		(6,9):(None,"Err"), (6,10):(None,"Err"), (6,11):(None,"Err"),
-		(6,12):(None,"Err"), (6,13):(None,"Err"), (6,14):(None,"Err"),
-		(6,15):(None,"Err"), (6,16):(None,"Err"), (6,17):(None,"Err"),
-		(6,18):(6,"D"), (6,19):(None,"Err"),
+		(6,0):(6,"D"), (6,1):(6,"D"), (6,2):(6,"D"), (6,3):(6,"D"),
+		(6,4):(6,"D"), (6,5):(24,"E"), (6,6):(6,"D"), (6,7):(6,"D"),
+		(6,8):(6,"D"), (6,9):(6,"D"), (6,10):(6,"D"), (6,11):(6,"D"),
+		(6,12):(6,"D"), (6,13):(6,"D"), (6,14):(6,"D"),
+		(6,15):(None,"Err"), (6,16):(None,"Err"), (6,17):(6,"D"),
+		(6,19):(6,"D"),
 		# Estado 7
 		(7,0):(25,"I"), (7,1):(25,"I"), (7,2):(25,"I"), (7,3):(25,"I"),
 		(7,4):(7,"F"), (7,5):(25,"I"), (7,6):(7,"F"), (7,7):(25,"I"),
@@ -65,7 +64,7 @@ class Lexico:
 		# Estado 8
 		(8,0):(None,"Err"), (8,1):(None,"Err"), (8,2):(None,"Err"),
 		(8,3):(None,"Err"), (8,4):(None,"Err"), (8,5):(None,"Err"),
-		(8,6):(None,"Err"), (8,7):(None,"Err"), (8,8):(None,"Err"),
+		(8,6):(None,"Err"), (8,7):(9,"L"), (8,8):(None,"Err"),
 		(8,9):(None,"Err"), (8,10):(None,"Err"), (8,11):(None,"Err"),
 		(8,12):(None,"Err"), (8,13):(None,"Err"), (8,14):(None,"Err"),
 		(8,15):(None,"Err"), (8,16):(None,"Err"), (8,17):(None,"Err"),
@@ -81,11 +80,10 @@ class Lexico:
 	
 	def __init__(self, p_inputFile):
 		self.file = open(p_inputFile, 'r')
-		#self.tokensFile = open('fichero_tokens.txt', 'a')
 
 
-	def filter(c):
-		# Vamos a mirar que caracter recibe para entrar en la MT
+	def filter(self, c):
+		# Metodo para filtrar el caracter recibido en un numero.
 		if c == '=':
 			return 0
 		elif c == '!':
@@ -116,27 +114,26 @@ class Lexico:
 			return 13
 		elif c == '-':
 			return 14
-		elif c == None:
+		elif c is None:
 			return 15
 		elif c == '':
 			return 16
-		elif c.isalnum:
-			return 18
 		elif c == '_':
 			return 19
 		elif c == '\t' or c == ' ':
 			return 17
 
 
-	def get_token():
+	def get_token(self):
 		estado = 0
 		while estado < 10:
 			c = self.file.read(1)
-			accion = MT[(estado, filter(c))][1]
-			estado = MT[(estado, filter(c))][0]
+			accion = self.MT[(estado, self.filter(c))][1]
+			estado = self.MT[(estado, self.filter(c))][0]
 			if estado is None:
 				# Tratar error
-				pass
+				# Hay que implementar el GE
+				return None
 			else:
 				if accion == 'A':
 					valor = c
@@ -144,43 +141,69 @@ class Lexico:
 					valor = valor * 10 + c
 				elif accion == 'C':
 					if valor < 2**15:
+						self.gen_token("INT", valor)
 						return (14, valor)
 					else:
 						# Tratar error
-						pass
+						# Hay que implementar el GE
+						continue
 				elif accion == 'D':
 					cadena += c
 				elif accion == 'E':
+					self.gen_token("CAD", cadena)
 					return (15, cadena)
 				elif accion == 'F':
 					palabra += c
+				elif accion == 'H':
+					palabra = ''
 				elif accion == 'I':
 					# Depende de la TS
-					pass
+					continue
+				elif accion == 'J':
+					cadena = ''
+				elif accion == 'L':
+					continue
 				elif accion == 'G1':
+					self.gen_token("EOF", "")
 					return (1,)
 				elif accion == 'G2':
+					self.gen_token("CR", "")
 					return (2,)
 				elif accion == 'G3':
+					self.gen_token("COMA", "")
 					return (3,)
 				elif accion == 'G4':
+					self.gen_token("PYC", "")
 					return (4,)
 				elif accion == 'G5':
+					self.gen_token("MENOS", "")
 					return (5,)
 				elif accion == 'G6':
+					self.gen_token("P1", "")
 					return (6,)
 				elif accion == 'G7':
+					self.gen_token("P2", "")
 					return (7,)
 				elif accion == 'G8':
+					self.gen_token("IG", "")
 					return (8,)
 				elif accion == 'G9':
+					self.gen_token("ASIG", "")
 					return (9,)
 				elif accion == 'G10':
+					self.gen_token("DESIG", "")
 					return (10,)
 				elif accion == 'G11':
+					self.gen_token("OR", "")
 					return (11,)
 				elif accion == 'G12':
+					self.gen_token("SOP", "")
 					return (12,)
 				else:
+					self.gen_token("MAS", "")
 					return (13,)
 
+	def gen_token(self, code, value):
+		tokensFile = open('fichero_tokens.txt', 'a')
+		tokensFile.write("<%s, %s>\n" %(code, value))
+		tokensFile.close()
