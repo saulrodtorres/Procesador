@@ -1,4 +1,5 @@
 import sys
+from analizadorLexico import Lexico
 
 def main():
 	inputfile = ''
@@ -6,7 +7,9 @@ def main():
 		print "Usage: procesador.py <inputfile>"
 		sys.exit(2)
 	inputfile = sys.argv[1]
-	print "OK"
+	AL = Lexico(inputfile)
+	token = AL.get_token()
+	print(token)
 	sys.exit(0)
 
 if __name__ == '__main__':
