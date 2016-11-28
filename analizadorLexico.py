@@ -53,7 +53,7 @@ class Lexico:
 		(6,8):(6,"D"), (6,9):(6,"D"), (6,10):(6,"D"), (6,11):(6,"D"),
 		(6,12):(6,"D"), (6,13):(6,"D"), (6,14):(6,"D"),
 		(6,15):(None,"Err"), (6,16):(None,"Err"), (6,17):(6,"D"),
-		(6,19):(6,"D"),
+		(6,18):(6,"D"), (6,19):(6,"D"),
 		# Estado 7
 		(7,0):(25,"I"), (7,1):(25,"I"), (7,2):(25,"I"), (7,3):(25,"I"),
 		(7,4):(7,"F"), (7,5):(25,"I"), (7,6):(7,"F"), (7,7):(25,"I"),
@@ -114,14 +114,16 @@ class Lexico:
 			return 13
 		elif c == '-':
 			return 14
-		elif c is None:
+		elif c == '\n':
 			return 15
 		elif c == '':
 			return 16
-		elif c == '_':
-			return 19
 		elif c == '\t' or c == ' ':
 			return 17
+		elif c == '_':
+			return 19
+		else:
+			return 18
 
 
 	def get_token(self):
@@ -199,9 +201,15 @@ class Lexico:
 				elif accion == 'G12':
 					self.gen_token("SOP", "")
 					return (12,)
-				else:
+				elif accion == 'G13':
 					self.gen_token("MAS", "")
 					return (13,)
+				elif accion == 'G14':
+					self.gen_token("C1", "")
+					return (16,)
+				else:
+					self.gen_token("C2", "")
+					return (17,)
 
 	def gen_token(self, code, value):
 		tokensFile = open('fichero_tokens.txt', 'a')
