@@ -2,6 +2,7 @@ class Lexico:
 
 
 	MT = {	# Estado 0
+		# (Estado, Caracter): (Estado, Accion)
 		(0,0):(1,"L"), (0,1):(2,"L"), (0,2):(3,"L"), (0,3):(4,"L"), 
 		(0,4):(5,"A"), (0,5):(6,"J"), (0,6):(7,"H"), (0,7):(8,"L"),
 		(0,8):(10,"G6"), (0,9):(11,"G7"), (0,10):(12,"G14"), 
@@ -143,7 +144,7 @@ class Lexico:
 					valor = valor * 10 + c
 				elif accion == 'C':
 					if valor < 2**15:
-						self.gen_token("INT", valor)
+						self.print_token("INT", valor)
 						return (14, valor)
 					else:
 						# Tratar error
@@ -152,7 +153,7 @@ class Lexico:
 				elif accion == 'D':
 					cadena += c
 				elif accion == 'E':
-					self.gen_token("CAD", cadena)
+					self.print_token("CAD", cadena)
 					return (15, cadena)
 				elif accion == 'F':
 					palabra += c
@@ -166,52 +167,52 @@ class Lexico:
 				elif accion == 'L':
 					continue
 				elif accion == 'G1':
-					self.gen_token("EOF", "")
+					self.print_token("EOF", "")
 					return (1,)
 				elif accion == 'G2':
-					self.gen_token("CR", "")
+					self.print_token("CR", "")
 					return (2,)
 				elif accion == 'G3':
-					self.gen_token("COMA", "")
+					self.print_token("COMA", "")
 					return (3,)
 				elif accion == 'G4':
-					self.gen_token("PYC", "")
+					self.print_token("PYC", "")
 					return (4,)
 				elif accion == 'G5':
-					self.gen_token("MENOS", "")
+					self.print_token("MENOS", "")
 					return (5,)
 				elif accion == 'G6':
-					self.gen_token("P1", "")
+					self.print_token("P1", "")
 					return (6,)
 				elif accion == 'G7':
-					self.gen_token("P2", "")
+					self.print_token("P2", "")
 					return (7,)
 				elif accion == 'G8':
-					self.gen_token("IG", "")
+					self.print_token("IG", "")
 					return (8,)
 				elif accion == 'G9':
-					self.gen_token("ASIG", "")
+					self.print_token("ASIG", "")
 					return (9,)
 				elif accion == 'G10':
-					self.gen_token("DESIG", "")
+					self.print_token("DESIG", "")
 					return (10,)
 				elif accion == 'G11':
-					self.gen_token("OR", "")
+					self.print_token("OR", "")
 					return (11,)
 				elif accion == 'G12':
-					self.gen_token("SOP", "")
+					self.print_token("SOP", "")
 					return (12,)
 				elif accion == 'G13':
-					self.gen_token("MAS", "")
+					self.print_token("MAS", "")
 					return (13,)
 				elif accion == 'G14':
-					self.gen_token("C1", "")
+					self.print_token("C1", "")
 					return (16,)
 				else:
-					self.gen_token("C2", "")
+					self.print_token("C2", "")
 					return (17,)
 
-	def gen_token(self, code, value):
+	def print_token(self, code, value):
 		tokensFile = open('fichero_tokens.txt', 'a')
 		tokensFile.write("<%s, %s>\n" %(code, value))
 		tokensFile.close()
