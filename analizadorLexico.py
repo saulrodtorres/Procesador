@@ -74,6 +74,13 @@ class Lexico:
     }
 
 
+    PR = { # Diccionario de Palabras Reservadas
+        "true" : 0, "false" : 1, "if" : 2, "while" : 3, "var" : 4,
+        "bool" : 5, "char" : 6, "int" : 7, "function" : 8, "prompt" : 9,
+        "write" : 10, "while" : 11
+    }
+
+
     def __init__(self, p_inputFile, p_symTable):
         self.file = open(p_inputFile, 'r')
         self.symTable = p_symTable
@@ -156,11 +163,14 @@ class Lexico:
                 elif accion == 'H':
                     palabra = '' + c
                 elif accion == 'I':
+                    if palabra in self.PR:
+                        self.print_token("PR", self.PR[palabra])
+                        return (19, self.PR[palabra])
                     pos = self.symTable.searchPos(0, palabra)
                     if (pos is False):
                         pos = self.symTable.add(0, palabra)
                     self.print_token("ID", pos)
-                    return (17, pos)
+                    return (18, pos)
                 elif accion == 'J':
                     cadena = ''
                 elif accion == 'L':
