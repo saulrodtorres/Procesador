@@ -1,114 +1,120 @@
-
 class Stack:
-     def __init__(self):
+
+    def __init__(self):
         self.items = []
 
-     def isEmpty(self):
+    def isEmpty(self):
         return self.items == []
 
-     def push(self, item):
-         self.items.append(item)
+    def push(self, item):
+        self.items.append(item)
 
-     def pop(self):
-         return self.items.pop()
+    def pop(self):
+        return self.items.pop()
 
-     def peek(self):
-         return self.items[len(self.items)-1]
+    def peek(self):
+        return self.items[len(self.items)-1]
 
-     def size(self):
-         return len(self.items)
+    def size(self):
+        return len(self.items)
 
 class Sintactico:
 
-    #TS = { # (Regla, NToken): (Consecuente de la Regla, NRegla)
+    Term = [
+        "true", "false", "if", "while", "var", "bool", "chars", "int",
+        "function", "prompt", "write", "return", "numero", "cadena",
+        "booleano", "cr", "$", "id", ",", ";", "(", ")", "-", "==", "=",
+        "!=", "||", "+=", "+", "{", "}"
+        ]
 
     def __init__(self, p_lexic, p_symTable):
-        self.lexic = p_lexic
-        # self.semantic = p_semantic // Semantico en un futuro
-        self.symTable = p_symTable
-    #INICIALIZAR PILA Y CADENA
+        self.AL = p_lexic
+        # Semantico en un futuro
+        self.TS = p_symTable
+        self.pila = Stack()
+        # Inicializar la pila con los valores adecuados
         self.pila.push("$") 
         self.pila.push("A") 
-        a=AL.get_token()
-        X="A"
-        while(X!="$")
-            X=sel.pila.pop() 
-            if X in Term:
-                #PR
-                if (X=="true" && a[0]==19 && a[1]==0):        
-                    a=AL.get_token()
-                elif (X=="false" && a[0]==19 && a[1]==1):
-                    a=AL.get_token()
-                elif (X=="if" && a[0]==19 && a[1]==2):
-                    a=AL.get_token()
-                elif (X=="while" && a[0]==19 && a[1]==3):
-                    a=AL.get_token()
-                elif (X=="var" && a[0]==19 && a[1]==4):
-                    a=AL.get_token()
-                elif (X=="bool" && a[0]==19 && a[1]==5):
-                    a=AL.get_token()
-                elif (X=="char" && a[0]==19 && a[1]==6):
-                    a=AL.get_token()
-                elif (X=="int" && a[0]==19 && a[1]==7):
-                    a=AL.get_token()
-                elif (X=="function" && a[0]==19 && a[1]==8):
-                    a=AL.get_token()
-                elif (X=="prompt" && a[0]==19 && a[1]==9):
-                    a=AL.get_token()
-                elif (X=="write" && a[0]==19 && a[1]==10):
-                    a=AL.get_token()
-                elif (X=="return" && a[0]==19 && a[1]==11):
-                    a=AL.get_token()
+        a = self.AL.get_token()
+        X = "A"
+        while X is not "$":
+            X = self.pila.pop() 
+            if X in self.Term:
+                # Palabras Reservadas
+                if (X == "true" and a[0] == 19 and a[1] == 0):        
+                    a = self.AL.get_token()
+                elif (X == "false" and a[0] == 19 and a[1] == 1):
+                    a = self.AL.get_token()
+                elif (X == "if" and a[0] == 19 and a[1] == 2):
+                    a = self.AL.get_token()
+                elif (X == "while" and a[0] == 19 and a[1] == 3):
+                    a = self.AL.get_token()
+                elif (X == "var" and a[0] == 19 and a[1] == 4):
+                    a = self.AL.get_token()
+                elif (X == "bool" and a[0]==19 and a[1]==5):
+                    a = self.AL.get_token()
+                elif (X == "chars" and a[0]==19 and a[1]==6):
+                    a=self.AL.get_token()
+                elif (X=="int" and a[0]==19 and a[1]==7):
+                    a=self.AL.get_token()
+                elif (X=="function" and a[0]==19 and a[1]==8):
+                    a=self.AL.get_token()
+                elif (X=="prompt" and a[0]==19 and a[1]==9):
+                    a=self.AL.get_token()
+                elif (X=="write" and a[0]==19 and a[1]==10):
+                    a=self.AL.get_token()
+                elif (X=="return" and a[0]==19 and a[1]==11):
+                    a=self.AL.get_token()
                 #Resto
-                elif (X=="numero" && a[0]==14):
-                    a=AL.get_token()
-                elif (X=="cadena" && a[0]==15):
-                    a=AL.get_token()
-                elif (X=="id" && a[0]==18):
-                    a=AL.get_token()
-                elif (X=="eof" && a[0]==1):
-                    a=AL.get_token()
-                elif (X=="cr" && a[0]==2):
-                    a=AL.get_token()
-                elif (X=="," && a[0]==3):
-                    a=AL.get_token()
-                elif (X==";" && a[0]==4):
-                    a=AL.get_token()
-                elif (X=="-" && a[0]==5):
-                    a=AL.get_token()
-                elif (X=="(" && a[0]==6):
-                    a=AL.get_token()
-                elif (X==")" && a[0]==7):
-                    a=AL.get_token()
-                elif (X=="==" && a[0]==8):
-                    a=AL.get_token()
-                elif (X=="=" && a[0]==9):
-                    a=AL.get_token()
-                elif (X=="!=" && a[0]==10):
-                    a=AL.get_token()
-                elif (X=="||" && a[0]==11):
-                    a=AL.get_token()
-                elif (X=="+=" && a[0]==12):
-                    a=AL.get_token()
-                elif (X=="+" && a[0]==13):
-                    a=AL.get_token()
-                elif (X=="{" && a[0]==16):
-                    a=AL.get_token()
-                elif (X=="}" && a[0]==17):
-                    a=AL.get_token()
+                elif (X=="numero" and a[0]==14):
+                    a=self.AL.get_token()
+                elif (X=="cadena" and a[0]==15):
+                    a=self.AL.get_token()
+                elif (X=="id" and a[0]==18):
+                    a=self.AL.get_token()
+                elif (X=="$" and a[0]==1):
+                    a=self.AL.get_token()
+                elif (X=="cr" and a[0]==2):
+                    a=self.AL.get_token()
+                elif (X=="," and a[0]==3):
+                    a=self.AL.get_token()
+                elif (X==";" and a[0]==4):
+                    a=self.AL.get_token()
+                elif (X=="-" and a[0]==5):
+                    a=self.AL.get_token()
+                elif (X=="(" and a[0]==6):
+                    a=self.AL.get_token()
+                elif (X==")" and a[0]==7):
+                    a=self.AL.get_token()
+                elif (X=="==" and a[0]==8):
+                    a=self.AL.get_token()
+                elif (X=="=" and a[0]==9):
+                    a=self.AL.get_token()
+                elif (X=="!=" and a[0]==10):
+                    a=self.AL.get_token()
+                elif (X=="||" and a[0]==11):
+                    a=self.AL.get_token()
+                elif (X=="+=" and a[0]==12):
+                    a=self.AL.get_token()
+                elif (X=="+" and a[0]==13):
+                    a=self.AL.get_token()
+                elif (X=="{" and a[0]==16):
+                    a=self.AL.get_token()
+                elif (X=="}" and a[0]==17):
+                    a=self.AL.get_token()
                 else:
                       # TODO: Tratar Error
                       continue
             else:
                 # ya se hace un X=self.pila.pop() arriba
-                var = M.has_key([X,a[0]])
+                var = self.M.has_key((X,a[0]))
                 if var is True:                
-                    for elem in M[X,a[0]]: #for elem in range(len(M)):
+                    for elem in self.M[X,a[0]]: #for elem in range(len(M)):
                         stack.push(elem)
         #cuando termina el while
-        if a is  "$":
+        if a is "$":
             return
-#M (NoTerminal,Terminal,valor):(Token ordenado alrevés)
+    #M (NoTerminal,Terminal,valor):(Token ordenado alreves)
     M = { 
         ("A",2 ,) : ("A", "cr"),#2:cr
         ("A",1 ,) : ("eof") ,#eof
@@ -270,10 +276,4 @@ class Sintactico:
         ("VP",10):("lambda"),
         ("VP",8):("lambda"),
         ("VP",11, ):("lambda")#or
-    }
-    
-
-
-
-
-    
+    }    
