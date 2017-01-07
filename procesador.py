@@ -1,5 +1,6 @@
 import sys
 from analizadorLexico import Lexico
+from analizadorSintactico import Sintactico
 from SymTable import SymTable
 
 def main():
@@ -15,12 +16,7 @@ def main():
     TS = SymTable()
     TS.newTable()
     AL = Lexico(inputfile, TS)
-    while True:
-        token = AL.get_token()
-        if token[0] == 1:
-            print(token)
-            break
-        print(token)
+    AS = Sintactico(AL, TS)
     TS.writeTable('./fichero_tabla.txt')
     sys.exit(0)
 
