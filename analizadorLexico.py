@@ -76,8 +76,8 @@ class Lexico:
 
     PR = { # Diccionario de Palabras Reservadas
         "true" : 0, "false" : 1, "if" : 2, "while" : 3, "var" : 4,
-        "bool" : 5, "char" : 6, "int" : 7, "function" : 8, "prompt" : 9,
-        "write" : 10, "while" : 11
+        "bool" : 5, "chars" : 6, "int" : 7, "function" : 8, "prompt" : 9,
+        "write" : 10, "return" : 11
     }
 
 
@@ -165,7 +165,7 @@ class Lexico:
                 elif accion == 'I':
                     if palabra in self.PR:
                         self.print_token("PR", self.PR[palabra])
-                        return (19, self.PR[palabra])
+                        return (19 + self.PR[palabra],)
                     pos = self.symTable.searchPos(0, palabra)
                     if (pos is False):
                         pos = self.symTable.add(0, palabra)
