@@ -12,6 +12,9 @@ def main():
     tokensFile.close()
     tableFile = open('fichero_tabla.txt', 'w')
     tableFile.close()
+    parseFile = open('fichero_parse.txt', 'w')
+    parseFile.write("Descendente\n")
+    parseFile.close()
     inputfile = sys.argv[1]
     TS = SymTable()
     TS.newTable()
