@@ -6,7 +6,7 @@ from SymTable import SymTable
 def main():
     inputfile = ''
     if (len(sys.argv) == 1):
-        print "Usage: procesador.py <inputfile>"
+        print ("Usage: procesador.py <inputfile>")
         sys.exit(2)
     tokensFile = open('fichero_tokens.txt', 'w')
     tokensFile.close()

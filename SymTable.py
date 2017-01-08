@@ -11,6 +11,12 @@ class SymTable():
     def __init__(self):
         self.tables = []
         self.nextId = 0
+        # Tabla de trabajo actual
+        self.workingTable = 0
+        # Modo de uso
+        # decZone = 0 -> Zona de sentencias
+        # decZone = 1 -> Zona de declaracion
+        self.decZone = 0
 
     def newTable(self):
         "Creates a new symbol table and returns its ID"

@@ -1,3 +1,4 @@
+from gestorErrores import *
 class Stack:
 
     def __init__(self):
@@ -20,11 +21,11 @@ class Stack:
 
 class Sintactico:
 
-        
+ 
     M = {
         #M (NoTerminal, Token): (Consecuente de la regla ordenado al reves)
         ("A", 2): ("A", "cr"),
-        ("A", 1): ("eof",) ,
+        ("A", 1): ("eof",),
         ("A",18): ("A", "cr", "B"),
         ("A",21): ("A", "cr", "B"),
         ("A",22): ("A", "cr", "B"),
@@ -278,7 +279,7 @@ class Sintactico:
         self.pila.push("A") 
         a = self.AL.get_token()
         X = "A"
-        while X is not "eof":
+        while X != "eof":
             X = self.pila.pop() 
             if X in self.Term:
                 # Palabras Reservadas
@@ -344,8 +345,7 @@ class Sintactico:
                 elif (X == "}" and a[0] == 17):
                     a = self.AL.get_token()
                 else:
-                      # TODO: Tratar Error
-                      continue
+                    error("SINTACTICO", self.AL.n_cr, "Estructura mal formada")
             else:
                 print("----------------")
                 print(X)

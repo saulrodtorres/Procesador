@@ -79,6 +79,7 @@ class Lexico:
     def __init__(self, p_inputFile, p_symTable):
         self.file = open(p_inputFile, 'r')
         self.symTable = p_symTable
+        # Numero de linea
         self.n_cr = 1
 
 
@@ -167,13 +168,13 @@ class Lexico:
                 elif accion == 'H':
                     palabra = '' + c
                 elif accion == 'I':
+                    self.file.seek(-1, 1)
                     if palabra in self.PR:
                         self.print_token("PR", self.PR[palabra])
                         return (19 + self.PR[palabra],)
                     pos = self.symTable.searchPos(0, palabra)
                     if (pos is False):
                         pos = self.symTable.add(0, palabra)
-                    self.file.seek(-1, 1)
                     self.print_token("ID", pos)
                     return (18, pos)
                 elif accion == 'J':
