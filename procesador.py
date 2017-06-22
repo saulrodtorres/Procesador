@@ -1,6 +1,6 @@
 import sys
-from analizadorLexico import Lexico
-from analizadorSintactico import Sintactico
+from ALexico import ALexico
+from ASintactico import ASintactico
 from SymTable import SymTable
 
 def main():
@@ -18,8 +18,8 @@ def main():
     inputfile = sys.argv[1]
     TS = SymTable()
     TS.newTable()
-    AL = Lexico(inputfile, TS)
-    AS = Sintactico(AL, TS)
+    AL = ALexico(inputfile, TS)
+    AS = ASintactico(AL, TS)
     TS.writeTable('./fichero_tabla.txt')
     sys.exit(0)
 

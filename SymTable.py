@@ -34,23 +34,29 @@ class SymTable():
         """Adds the lexem lex to table ID.
         Returns the ID of the lex if everything is OK or false if lex already exist on that table"""
         return self.tables[id].add(lex)
+
     def addNumeroParametros (self,id,lex,n):
         """Adds the number of Param"""
         self.tables[id].setParams(n)
+
     def getNumeroParametros (seld,id,lex):
         """devuelve el numero de parametros en vector"""
         return self.tables[id].getNumeroParametros(n)
+
     def addParams (self,id,lex,vector):
         """Adds the params in a vector form"""
         self.tables[id].setParams(lex,vector)    
+
     def getParams(self,id,lex):
-        """Devuelve los parametros de los parámetros en caso de ser una entrada de función"""
+        """Devuelve los parametros de los parametros en caso de ser una entrada de funcion"""
         return self.tables[id].getParams()
+
     def addReturnType (self,id,lex,type):
         """Adds the return type"""
         self.tables[id].setReturnType(type)    
+
     def getReturnType(self,id):
-        """Devuelve los tipos de retornos en casos de ser una entrada de función"""
+        """Devuelve los tipos de retornos en casos de ser una entrada de funcion"""
         return self.tables[id].getReturnType()
 
     def existTable(self, id):
@@ -83,4 +89,7 @@ class SymTable():
             tab.write(path)
         return True
 
+    def searchPos(self, id, lex):
+        """Returns the id of lex into table id"""
 
+        return self.tables[id].getPos(lex)

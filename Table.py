@@ -12,6 +12,7 @@ class Table():
         self.exists = True
         self.idTable = idTable
         self.posicion = 1
+
     def delete(self):
         """This ufnction marks this table as deleted"""
         self.exists = False
@@ -47,18 +48,21 @@ class Table():
     def getType(self, lex):
         "Returns the type of lex"
         return self.diccionario_lexemas[lex].getTipo()
+
     def getParams(self,lex):
         return self.diccionario_lexemas[lex].getVectorParametros()
+
     def setParams(self,lex,vector):    
         self.diccionario_lexemas[lex].setVectorParametros(vector)                
-
     def getReturnType(self,lex):
         return self.diccionario_lexemas[lex].getTipoRetorno()
+
     def setReturnType(self,lex,tipo):    
         self.diccionario_lexemas[lex].setTipoRetorno(tipo)
 
     def getNumeroParametros(self,lex):
         return self.diccionario_lexemas[lex].getNumeroParametros()
+
     def setNumeroParametros(self,lex,n):    
         self.diccionario_lexemas[lex].setNumeroParametros(n)             
     
@@ -69,20 +73,28 @@ class Table():
 
     def write(self, path):
         "Writes the contents of this table to the file pointed to by path"
-"""
         if self.exist():
             f = open(path, 'a')
-            f.write('CONTENIDO DE LA TABLA # ' + str(self.id) + ':\n')
+            f.write('CONTENIDO DE LA TABLA # ' + str(self.idTable) + ':\n')
             for e in self.diccionario_lexemas.keys():
                 f.write('* LEXEMA: \'' + str(e) + '\'\n')
                 if self.diccionario_lexemas[e] != '':
                     f.write(' ATRIBUTOS:\n')
-                    f.write(' + tipo: \'' + self.diccionario_lexemas[e] + '\'' )
+                    f.write(' + tipo: \'' + str(self.diccionario_lexemas[e].getTipo) + '\'' )
                 f.write('\n')
             f.write('\n\n\n')
             f.close()
             return True
         else:
             return False
-"""
-    return False
+
+    def getPos(self, lex):
+        "returns the ID of lex or False if lex is not in this table"
+
+        i = 0
+        for e in self.diccionario_lexemas.keys():
+            if e == lex:
+                break
+            else:
+                i = i + 1
+        return False if i == len(self.diccionario_lexemas) else i

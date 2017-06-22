@@ -1,4 +1,4 @@
-from GestorErrores import *
+from gestorErrores import *
 from Stack import *
 
 class ASintactico:
