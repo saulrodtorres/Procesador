@@ -46,24 +46,22 @@ class Table():
 
     def getType(self, lex):
         "Returns the type of lex"
-
         return self.diccionario_lexemas[lex].getTipo()
     def getParams(self,lex):
         return self.diccionario_lexemas[lex].getVectorParametros()
     def setParams(self,lex,vector):    
         self.diccionario_lexemas[lex].setVectorParametros(vector)                
-    def getRetorno(self,lex):
+
+    def getReturnType(self,lex):
         return self.diccionario_lexemas[lex].getTipoRetorno()
-    def setRetorno(self,lex,tipo):    
+    def setReturnType(self,lex,tipo):    
         self.diccionario_lexemas[lex].setTipoRetorno(tipo)
-    def getParams(self,lex):
-        return self.diccionario_lexemas[lex].getVectorParametros()
-    def setParams(self,lex,vector):    
-        self.diccionario_lexemas[lex].setTipo(vector)
+
     def getNumeroParametros(self,lex):
         return self.diccionario_lexemas[lex].getNumeroParametros()
     def setNumeroParametros(self,lex,n):    
         self.diccionario_lexemas[lex].setNumeroParametros(n)             
+    
     def contains(self, lex):
         "Checks if lex is in the table or not"
 
