@@ -30,18 +30,30 @@ class SymTable():
         self.tables[id].delete()
         pass
 
+    def add(self, id, lex):
+        """Adds the lexem lex to table ID.
+        Returns the ID of the lex if everything is OK or false if lex already exist on that table"""
+        return self.tables[id].add(lex)
+
+    def addParams (self,id,lex,vector):
+        """Adds the params in a vector form"""
+        self.tables[id].setParams(lex,vector)
+    def addReturnType (self,id,lex,type):
+        """Adds the return type"""
+        self.tables[id].setRetorno(type)
+    def addNumeroParametros (self,id,lex,n):
+        """Adds the number of Param"""
+        self.tables[id].setParams(n)
+
+
+    #faltan los get    
     def existTable(self, id):
         "Checks wether Table ID exists or not"
         a = self.tables[id]
         if not a or not a.exist():
             return False
         else:
-            return True
-
-    def add(self, id, lex):
-        """Adds the lexem lex to table ID.
-        Returns the ID of the lex if everything is OK or false if lex already exist on that table"""
-        return self.tables[id].add(lex)
+            return True 
 
     def addType(self, id, lex, type):
         """Sets the type of lex in table id to type.
@@ -49,7 +61,7 @@ class SymTable():
 
         return self.tables[id].setType(lex, type)
 
-    def checkType(self, id, lex):
+    def getType(self, id, lex):
         """Returns the type of lex on table id"""
 
         return self.tables[id].getType(lex)
@@ -65,7 +77,4 @@ class SymTable():
             tab.write(path)
         return True
 
-    def searchPos(self, id, lex):
-        """Returns the id of lex into table id"""
 
-        return self.tables[id].getPos(lex)

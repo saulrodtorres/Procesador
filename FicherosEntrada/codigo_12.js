@@ -1,0 +1,1 @@
+if (function int f ({return 1})) prompt(a)

@@ -1,0 +1,34 @@
+* pruebas b·sicas
+|-----------+-----------------------------------------------+--------------------+--------------------|
+| prueba    | DescripciÛn                                   | resultado esperado | resultado devuelto |
+|-----------+-----------------------------------------------+--------------------+--------------------|
+| codigo_01 | prueba de variable int                        | correcta           | ?                  |
+| codigo_02 | prueba de variable chars                      | correcta           | ?                  |
+| codigo_03 | prueba de variable bool                       | correcta           | ?                  |
+| codigo_04 | funcion simple con return int y parametro int | correcta           | ?                  |
+
+* pruebas errores del an·lisis lexico
+|-----------+----------------+--------------------+--------------------|
+| prueba    | DescripciÛn    | resultado esperado | resultado devuelto |
+|-----------+----------------+--------------------+--------------------|
+| codigo_05 | por determinar | correcta           | ?                  |
+
+codigo_05= "error lexico -> $ en medio de un function"
+
+codigo_06= "asignacion int"
+codigo_07= "asignacion chars"
+codigo_08= "asignacion bool"
+codigo_13= "asignacion ids"
+
+* pruebas errores del an·lisis sint·ctico
+codigo_09= "error sintactico (tokens no permitidos) -> deber√≠a fallar por parametro sin tipo"
+codigo_10= ""
+codigo_11= "error sintactico (plabras reservadas mal posicionadas)"
+codigo_12= "error sintactico (estructuras incorrectas)"
+
+codigo_1A= "variable int con asignaci√≥n (OPCIONAL, NO IMPLEMENTADO)"
+codigo_2A= "variable chars con asignaci√≥n (OPCIONAL, NO IMPLEMENTADO)"
+codigo_3A= "variable bool con asignaci√≥n (OPCIONAL, NO IMPLEMENTADO)"
+
+	
+* pruebas errores del an·lisis sem·ntico
