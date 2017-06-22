@@ -1,0 +1,70 @@
+* pruebas b·sicas
+|-----------+----------------------------------------------------+--------------------+--------------------|
+| prueba    | DescripciÛn                                        | resultado esperado | resultado devuelto |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+| codigo_01 | prueba de variable int                             | correcta           | ?                  |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+| codigo_02 | prueba de variable chars                           | correcta           | ?                  |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+| codigo_03 | prueba de variable bool                            | correcta           | ?                  |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+| codigo_04 | prueba varias formas de declarar variable          | correcta           | ?                  |
+|           | prueba varias lineas                               |                    |                    |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+| codigo_05 | declaraciÛn 3 funciones, con 0, 1 y 2 argumentos.  | correcta           | ?                  |
+|           | prueba funcion con y sin retorno.                  |                    |                    |
+|           | prueba para prompt y write                         |                    |                    |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+| codigo_06 | prueba while dentro y fuera de una funciÛn         | correcta           | ?                  |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+| codigo_07 | prueba de while con varios tipos de condiciones    |                    |                    |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+|           | prueba de todos los tipos de if implementados      |                    |                    |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+|           | prueba de todos los tipos de funcion implementados |                    |                    |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+|           | operaciones en las declaraciones de variables      |                    |                    |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+|           | operaciones entre variables                        |                    |                    |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+|           | condiciones bool de varios tipos                   |                    |                    |
+|-----------+----------------------------------------------------+--------------------+--------------------|
+|           |                                                    |                    |                    | 
+|-----------+---------------------------------------------------+--------------------+--------------------|  
+|           |                                                    |                    |                    |
+|-----------+---------------------------------------------------+--------------------+--------------------|
+|           |                                                    |                    |                    |
+|-----------+---------------------------------------------------+--------------------+--------------------|
+|           |                                                    |                    |                    |
+|           |                                                    |                    |                    |
+|           |                                                    |                    |                    |
+|           |                                                    |                    |                    |
+|           |                                                    |                    |                    |
+|           |                                                    |                    |                    |
+|           |                                                    |                    |                    |
+
+* pruebas errores del an·lisis lexico
+|-----------+----------------+--------------------+--------------------|
+| prueba    | DescripciÛn    | resultado esperado | resultado devuelto |
+|-----------+----------------+--------------------+--------------------|
+| codigo_05 | por determinar | correcta           | ?                  |
+
+codigo_05= "error lexico -> $ en medio de un function"
+
+codigo_06= "asignacion int"
+codigo_07= "asignacion chars"
+codigo_08= "asignacion bool"
+codigo_13= "asignacion ids"
+
+* pruebas errores del an·lisis sint·ctico
+codigo_09= "error sintactico (tokens no permitidos) -> deber√≠a fallar por parametro sin tipo"
+codigo_10= ""
+codigo_11= "error sintactico (plabras reservadas mal posicionadas)"
+codigo_12= "error sintactico (estructuras incorrectas)"
+
+codigo_1A= "variable int con asignaci√≥n (OPCIONAL, NO IMPLEMENTADO)"
+codigo_2A= "variable chars con asignaci√≥n (OPCIONAL, NO IMPLEMENTADO)"
+codigo_3A= "variable bool con asignaci√≥n (OPCIONAL, NO IMPLEMENTADO)"
+
+	
+* pruebas errores del an·lisis sem·ntico

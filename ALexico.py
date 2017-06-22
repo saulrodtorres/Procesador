@@ -1,6 +1,6 @@
-from gestorErrores import *
+from GestorErrores import *
 
-class Lexico:
+class ALexico:
 
 
     MT = { # (Estado, Caracter): (Estado, Accion)

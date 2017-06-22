@@ -30,18 +30,36 @@ class SymTable():
         self.tables[id].delete()
         pass
 
+    def add(self, id, lex):
+        """Adds the lexem lex to table ID.
+        Returns the ID of the lex if everything is OK or false if lex already exist on that table"""
+        return self.tables[id].add(lex)
+    def addNumeroParametros (self,id,lex,n):
+        """Adds the number of Param"""
+        self.tables[id].setParams(n)
+    def getNumeroParametros (seld,id,lex):
+        """devuelve el numero de parametros en vector"""
+        return self.tables[id].getNumeroParametros(n)
+    def addParams (self,id,lex,vector):
+        """Adds the params in a vector form"""
+        self.tables[id].setParams(lex,vector)    
+    def getParams(self,id,lex):
+        """Devuelve los parametros de los parámetros en caso de ser una entrada de función"""
+        return self.tables[id].getParams()
+    def addReturnType (self,id,lex,type):
+        """Adds the return type"""
+        self.tables[id].setReturnType(type)    
+    def getReturnType(self,id):
+        """Devuelve los tipos de retornos en casos de ser una entrada de función"""
+        return self.tables[id].getReturnType()
+
     def existTable(self, id):
         "Checks wether Table ID exists or not"
         a = self.tables[id]
         if not a or not a.exist():
             return False
         else:
-            return True
-
-    def add(self, id, lex):
-        """Adds the lexem lex to table ID.
-        Returns the ID of the lex if everything is OK or false if lex already exist on that table"""
-        return self.tables[id].add(lex)
+            return True 
 
     def addType(self, id, lex, type):
         """Sets the type of lex in table id to type.
@@ -49,7 +67,7 @@ class SymTable():
 
         return self.tables[id].setType(lex, type)
 
-    def checkType(self, id, lex):
+    def getType(self, id, lex):
         """Returns the type of lex on table id"""
 
         return self.tables[id].getType(lex)
@@ -65,7 +83,4 @@ class SymTable():
             tab.write(path)
         return True
 
-    def searchPos(self, id, lex):
-        """Returns the id of lex into table id"""
 
-        return self.tables[id].getPos(lex)
