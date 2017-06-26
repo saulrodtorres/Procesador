@@ -1,8 +1,14 @@
-#borra archivos de compilación para entregar en github
+REM borra archivos de compilación para entregar en github
+
 ECHO OFF
-ECHO .............cambiando directorio
+
 cd ../
-ECHO .............borrando los archivos .PYC
+ECHO ----------------------------------------------------------
+ECHO              borrando los archivos .PYC
+ECHO ----------------------------------------------------------
 del *.pyc
-ECHO .............fin de borrado
+ECHO ----------------------------------------------------------
+ECHO              fin llamada a clean.bat
+ECHO ----------------------------------------------------------
 pause
+cd ./Scripts

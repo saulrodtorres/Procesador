@@ -1,6 +1,6 @@
-var int a 
-var int b
-var int c
-a=2
-b=1
-c=b
+var bool existe = true
+var int contador = 0
+while (existe){
+  prompt(n)
+  if(contador = 2) existe = false
+}
