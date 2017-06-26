@@ -1,2 +1,1 @@
-var chars cadena1
-var chars cadena2
+var int bb
