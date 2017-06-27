@@ -1,0 +1,4 @@
+TS0:
+*LEXEMA:n
++TipoRetorno:
++VectorParametros:

@@ -1,0 +1,3 @@
+TS0:
+*LEXEMA:n
++TipoRetorno:
