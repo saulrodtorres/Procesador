@@ -336,12 +336,12 @@ class ASintactico:
                 else:
                     error("SINTACTICO", self.AL.n_cr, "Estructura mal formada")
             else:
-                print("----------------")
-                print(X)
+                # print("----------------")
+                # print(X)
                 if (X, a[0]) in self.M:
                     fd = open('fichero_parse.txt', 'a')
                     fd.write(str(self.NR[X,self.M[X,a[0]]]) + "\n")
                     fd.close()
                     for elem in self.M[X,a[0]]:
-                        print(elem)
+                        # print(elem)
                         self.pila.push(elem)
