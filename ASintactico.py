@@ -6,6 +6,7 @@ class ASintactico:
  
     M = {
         #M (NoTerminal, Token): (Consecuente de la regla ordenado al reves)
+        #AS + numero de regla + numero de accion. EJ: AS11, AS511
         ("P", 2): ("P", "cr"),
         ("P", 1): ("eof",),
         ("P",18): ("P", "cr", "SS"),
@@ -255,19 +256,27 @@ class ASintactico:
         "!=", "||", "+=", "+", "{", "}"
         ]
 
+    NoTerm = [
+        "P", "SC", "SS", "F", "R", "G", "B", "I", "II", "III", "IIIP",
+        "IIP", "IP", "IV", "IVP", "E", "LL", "A1", "A2", "Q", "T", "X",
+        "U", "V", "VI", "VP"
+        ]
+
     def __init__(self, p_lexic, p_symTable):
         self.AL = p_lexic
         # Semantico en un futuro
         self.TS = p_symTable
         self.pila = Stack()
+        self.pila_aux = Stack()
         # Inicializar la pila con los valores adecuados
         self.pila.push("eof") 
         self.pila.push("P") 
         a = self.AL.get_token()
         X = "P"
-        while X != "eof":
+        while (X != "eof" and self.pila_aux.peek() != "P"):
             X = self.pila.pop() 
             if X in self.Term:
+                self.pila_aux.push(X)
                 # Palabras Reservadas
                 if (X == "true" and a[0] == 19):
                     a = self.AL.get_token()
@@ -335,13 +344,18 @@ class ASintactico:
                     a = self.AL.get_token()
                 else:
                     error("SINTACTICO", self.AL.n_cr, "Estructura mal formada")
-            else:
+            elif X in self.NoTerm:
                 # print("----------------")
                 # print(X)
                 if (X, a[0]) in self.M:
                     fd = open('fichero_parse.txt', 'a')
                     fd.write(str(self.NR[X,self.M[X,a[0]]]) + "\n")
                     fd.close()
+                    self.pila_aux.push(X)
                     for elem in self.M[X,a[0]]:
                         # print(elem)
                         self.pila.push(elem)
+                else:
+                    error("SINTACTICO", self.AL.n_cr, "Estructura mal formada")
+            else:
+                # execute()
