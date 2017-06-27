@@ -73,21 +73,25 @@ class Table():
 
     def write(self, path):
         "Writes the contents of this table to the file pointed to by path"
-        if self.exist():
-            f = open(path, 'a')
-            f.write('CONTENIDO DE LA TABLA # ' + str(self.idTable) + ':\n')
-            for e in self.diccionario_lexemas.keys():
-                f.write('* LEXEMA: \'' + str(e) + '\'\n')
-                if self.diccionario_lexemas[e] != '':
-                    f.write(' ATRIBUTOS:\n')
-                    f.write(' + tipo: \'' + str(self.diccionario_lexemas[e].getTipo) + '\'' )
-                f.write('\n')
-            f.write('\n\n\n')
-            f.close()
-            return True
-        else:
-            return False
-
+        f = open(path, 'a')
+        f.write('TS' + str(self.idTable) + ':\n')
+        for claveDL in self.diccionario_lexemas.keys():
+                f.write('*LEXEMA:' + str(claveDL) + '\n')
+                if self.diccionario_lexemas[claveDL] != '':
+                    if (self.diccionario_lexemas[claveDL].getTipo() != ''):
+                        f.write('+Tipo:'+ self.diccionario_lexemas.getTipo()+'\n')
+                    f.write('+TipoRetorno:'+ self.diccionario_lexemas[claveDL].getTipoRetorno()+'\n')
+                    if (self.diccionario_lexemas[claveDL].getVectorParametros!= ''):
+                        vectorString = self.toString(self.diccionario_lexemas[claveDL].getVectorParametros())
+                        f.write('+VectorParametros:'+ vectorString +'\n')
+                    if (self.diccionario_lexemas[claveDL].getPos()!= ''):
+                        f.write('+Posicion:'+ str(self.diccionario_lexemas[claveDL].getPos())+'\n')
+        return True
+    def toString (self, vector):
+        stringfinal = ''
+        for elementoVector in vector:
+            stringfinal = stringfinal + elementoVector        
+        return stringfinal
     def getPos(self, lex):
         "returns the ID of lex or False if lex is not in this table"
 

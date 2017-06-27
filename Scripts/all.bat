@@ -27,9 +27,22 @@ ECHO ###########################STARTING MAIN###################################
 ECHO ###########################################################################
 ECHO ###########################DATE AND TIME###################################
 ECHO ###########################################################################
-echo                resultados en /%datetimef%
+ECHO                            resultados en /%datetimef%
 mkdir ..\Salidas\%datetimef%
+ECHO                            CODIGO 01
+CALL execute.bat codigo_01.js %datetimef%
+ECHO                            CODIGO 02
+CALL execute.bat codigo_02.js %datetimef%
+ECHO                            CODIGO 03
+CALL execute.bat codigo_03.js %datetimef%
+ECHO                            CODIGO 04
+execute.bat codigo_04.js %datetimef%
+ECHO                            CODIGO 05
 execute.bat codigo_05.js %datetimef%
+ECHO                            CODIGO 06
+execute.bat codigo_06.js %datetimef%
+ECHO                            CODIGO 07
+execute.bat codigo_07.js %datetimef%
 ECHO ###########################################################################
 ECHO ###########################END OF MAIN#####################################
 ECHO ###########################################################################
