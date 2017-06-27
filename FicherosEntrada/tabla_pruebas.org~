@@ -3,7 +3,7 @@
 | prueba    | Descripción                                                                    | resultado esperado | resultado devuelto |
 |-----------+--------------------------------------------------------------------------------+--------------------+--------------------|
 | codigo_01 | prueba declaración de variable int                                             | correcta           | ok                 |
-|           | prueba identificador con un solo carácter                                      | correcta           | error              |
+|           | prueba identificador con un solo carácter                                      | correcta           | ok                 |
 |-----------+--------------------------------------------------------------------------------+--------------------+--------------------|
 | codigo_02 | prueba de variable chars                                                       | correcta           | ok                 |
 |           | prueba de salto de linea                                                       | correcta           | ok                 |
@@ -20,8 +20,9 @@
 |           | prueba declaración después de ; en linea siguiente                             | correcta           |                    |
 |-----------+--------------------------------------------------------------------------------+--------------------+--------------------|
 | codigo_04 | prueba varias formas de asignar variable                                       | correcta           | ?                  |
-|           | prueba asignación después de ;                                                 |                    |                    |
+|           | prueba asignación en dos lineas                                                |                    |                    |
 |           | operaciones en la declaración de un entero                                     |                    |                    |
+|           | prueba con ;                                                                   |                    |                    |
 |-----------+--------------------------------------------------------------------------------+--------------------+--------------------|
 | codigo_05 | declaración 3 funciones, con 0, 1 y 2 argumentos.                              | correcta           | ?                  |
 |           | prueba funcion con y sin retorno.                                              |                    |                    |

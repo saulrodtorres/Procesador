@@ -30,8 +30,8 @@
 |-----------+--------------------------------------------------------------------------------+--------------------+--------------------|
 | codigo_06 | prueba de un if simple                                                         | correcta           | ?                  |
 |-----------+--------------------------------------------------------------------------------+--------------------+--------------------|
-| codigo_07 | prueba de un if compuesto en una linea                                         | correcta           | ?                  |
-|           | prueba de un if compuesto en varias lineas                                     |                    |                    |
+| codigo_07 | prueba de un if compuesto en una linea                                         | no implementado    | error sintáctico   |
+|           | prueba de un if compuesto en varias lineas                                     | no implementado    | error sintáctico   |
 |-----------+--------------------------------------------------------------------------------+--------------------+--------------------|
 | codigo_08 | prueba de todos los tipos de condiciones para un if, excepto llamada a función | correcta           | ?                  |
 |-----------+--------------------------------------------------------------------------------+--------------------+--------------------|

@@ -1,9 +1,6 @@
-var bool existe 
+var bool existe
 existe = true
 contador = 2
-if(existe){
+if (existe){
   contador = 3
-}
-else{
-  c=10
 }
