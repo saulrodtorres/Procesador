@@ -153,22 +153,22 @@ class ALexico:
                     valor = valor * 10 + int(c)
                 elif accion == 'C':
                     if valor < 2**15:
-                        self.file.seek(-1, 1)
+                        self.file.seek(self.file.tell() -1)
                         self.print_token("INT", valor)
                         return (14, valor)
                     else:
                         error("LEXICO", self.n_cr, "Valor numerico por encima del permitido")
                 elif accion == 'D':
-                    cadena += c
+                    cadena += str(c)
                 elif accion == 'E':
                     self.print_token("CAD", cadena)
                     return (15, cadena)
                 elif accion == 'F':
-                    palabra += c
+                    palabra += str(c)
                 elif accion == 'H':
-                    palabra = '' + c
+                    palabra = '' + str(c)
                 elif accion == 'I':
-                    self.file.seek(-1, 1)
+                    self.file.seek(self.file.tell() - 1)
                     if palabra in self.PR:
                         self.print_token("PR", self.PR[palabra])
                         return (19 + self.PR[palabra],)
@@ -204,11 +204,11 @@ class ALexico:
                     self.print_token("P2", "")
                     return (7,)
                 elif accion == 'G8':
-                    self.file.seek(-1, 1)
+                    # self.file.seek(self.file.tell() - 1)
                     self.print_token("IG", "")
                     return (8,)
                 elif accion == 'G9':
-                    self.file.seek(-1, 1)
+                    self.file.seek(self.file.tell() -1)
                     self.print_token("ASIG", "")
                     return (9,)
                 elif accion == 'G10':
@@ -218,11 +218,11 @@ class ALexico:
                     self.print_token("OR", "")
                     return (11,)
                 elif accion == 'G12':
-                    self.file.seek(-1, 1)
+                    self.file.seek(self.file.tell() -1)
                     self.print_token("SOP", "")
                     return (12,)
                 elif accion == 'G13':
-                    self.file.seek(-1, 1)
+                    self.file.seek(self.file.tell() -1)
                     self.print_token("MAS", "")
                     return (13,)
                 elif accion == 'G14':

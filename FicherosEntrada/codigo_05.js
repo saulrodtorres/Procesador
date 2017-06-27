@@ -1,15 +1,15 @@
 function printf (chars s)
 {
-prompt(s)
+write(s)
 }
-function printf (int s)
+function printf (int z)
 {
-write(s)
-write(s)
-write(s)
+write(z)
+write(z)
+write(z)
 }
 function int suma (int a, int b)
 {
-  var int resultado = a + b
+  resultado = a + b
   return resultado
 }

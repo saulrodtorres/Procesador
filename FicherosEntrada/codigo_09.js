@@ -1,3 +1,3 @@
-function f (int b b){
+function f (int b){
 prompt(a)
 }
