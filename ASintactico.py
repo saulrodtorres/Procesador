@@ -7,16 +7,27 @@ class ASintactico:
     M = {
         #M (NoTerminal, Token): (Consecuente de la regla ordenado al reves)
         #AS + numero de regla + numero de accion. EJ: AS11, AS511
+        ("Z", 2): ("P", "AS01"),
+        ("Z", 1): ("P", "AS01"),
+        ("Z",18): ("P", "AS01"),
+        ("Z",21): ("P", "AS01"),
+        ("Z",22): ("P", "AS01"),
+        ("Z",23): ("P", "AS01"),
+        ("Z",27): ("P", "AS01"),
+        ("Z",28): ("P", "AS01"),
+        ("Z",29): ("P", "AS01"),
+        ("Z",30): ("P", "AS01"),
+
         ("P", 2): ("P", "cr"),
         ("P", 1): ("eof",),
-        ("P",18): ("P", "cr", "SS"),
+        ("P",18): ("AS11", "P", "cr", "SS"),
         ("P",21): ("P", "cr", "SC"),
         ("P",22): ("P", "cr", "SC"),
-        ("P",23): ("P", "cr", "SS"),
+        ("P",23): ("AS11", "P", "cr", "SS"),
         ("P",27): ("P", "cr", "F"),
-        ("P",28): ("P", "cr", "SS"),
-        ("P",29): ("P", "cr", "SS"),
-        ("P",30): ("P", "cr", "SS"),
+        ("P",28): ("AS11", "P", "cr", "SS"),
+        ("P",29): ("AS11", "P", "cr", "SS"),
+        ("P",30): ("AS11", "P", "cr", "SS"),
 
         ("SC",21): ("SS", ")", "E", "(", "if"),
         ("SC",22): ("}", "B", "{", "R", ")", "E", "(", "while"),
@@ -246,7 +257,9 @@ class ASintactico:
         ("T", ("chars",)):56,
 
         ("X", ("T",)):57,
-        ("X", ("lambda",)):58
+        ("X", ("lambda",)):58,
+
+        ("Z", ("P",)):59
     }
 
     Term = [
@@ -259,7 +272,7 @@ class ASintactico:
     NoTerm = [
         "P", "SC", "SS", "F", "R", "G", "B", "I", "II", "III", "IIIP",
         "IIP", "IP", "IV", "IVP", "E", "LL", "A1", "A2", "Q", "T", "X",
-        "U", "V", "VI", "VP"
+        "U", "V", "VI", "VP", "Z"
         ]
 
     def __init__(self, p_lexic, p_symTable):
@@ -270,10 +283,10 @@ class ASintactico:
         self.pila_aux = Stack()
         # Inicializar la pila con los valores adecuados
         self.pila.push("eof") 
-        self.pila.push("P") 
+        self.pila.push("Z") 
         a = self.AL.get_token()
-        X = "P"
-        while (X != "eof" and self.pila_aux.peek() != "P"):
+        X = "Z"
+        while (X != "eof" and self.pila_aux.peek() != "Z"):
             X = self.pila.pop() 
             if X in self.Term:
                 self.pila_aux.push(X)

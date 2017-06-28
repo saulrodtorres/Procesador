@@ -17,7 +17,6 @@ def main():
     parseFile.close()
     inputfile = sys.argv[1]
     TS = SymTable()
-    TS.newTable()
     AL = ALexico(inputfile, TS)
     AS = ASintactico(AL, TS)
     TS.writeTable('./fichero_tabla.txt')
