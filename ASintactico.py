@@ -174,8 +174,8 @@ class ASintactico:
         ("VP", 11): ("lambda",)
     }
 
-    NR = {
-        ("P",("P", "cr", "SS")):1,
+    NR = {
+        ("P",("AS11", "P", "cr", "SS")):1,
         ("P",("P", "cr", "SC")):2,
         ("P",("P", "cr", "F")):3,
         ("P",("P", "cr")): 4,
@@ -259,7 +259,7 @@ class ASintactico:
         ("X", ("T",)):57,
         ("X", ("lambda",)):58,
 
-        ("Z", ("P",)):59
+        ("Z", ("P", "AS01")):59
     }
 
     Term = [
@@ -286,7 +286,7 @@ class ASintactico:
         self.pila.push("Z") 
         a = self.AL.get_token()
         X = "Z"
-        while (X != "eof" and self.pila_aux.peek() != "Z"):
+        while (X != "eof" ):# ojo falta and self.pila_aux.peek() != "Z"):
             X = self.pila.pop() 
             if X in self.Term:
                 self.pila_aux.push(X)
@@ -356,7 +356,7 @@ class ASintactico:
                 elif (X == "}" and a[0] == 17):
                     a = self.AL.get_token()
                 else:
-                    error("SINTACTICO", self.AL.n_cr, "Estructura mal formada")
+                    error("SINTACTICO", self.AL.n_cr, "Estructura mal formada 1")
             elif X in self.NoTerm:
                 # print("----------------")
                 # print(X)
@@ -369,6 +369,265 @@ class ASintactico:
                         # print(elem)
                         self.pila.push(elem)
                 else:
+                    print(X)
                     error("SINTACTICO", self.AL.n_cr, "Estructura mal formada")
+#####################################################################################################            
             else:
-                # execute()
+                if (X == "AS01") :
+                    #{newTable()}
+                    self.TS.newTable()
+                elif (X == "AS02"):                    
+                    #{AS02: POP(1)}
+                    self.pila_aux.pop()
+                elif (X == "AS11"):
+                    #{Aux[top - 3].tipo := if (Aux[top - 2].tipo == tipo_ok) && (Aux[top].tipo == tipo_ok) then tipo_ok else tipo_error; POP(3)}
+                    error("IMPLEMENTACION", self.AL.n_cr, "No implementado")
+                elif (X == "AS21"):                    
+                    # {Aux[top - 3].tipo := if (Aux[top - 2].tipo == tipo_ok) && (Aux[top].tipo == tipo) then tipo_ok else tipo_error; POP(3)}   
+                
+                elif (X == "AS31"):                    
+                    # {Aux[top - 3].tipo := if (Aux[top - 2].tipo == tipo_ok) && (Aux[top].tipo == tipo) then tipo_ok else tipo_error; POP(3)}
+                
+                elif (X == "AS41"):                    
+                    # {Aux[top - 2].tipo := Aux[top].tipo; POP(2)}
+                
+                elif (X == "AS51"):                    
+                    # {Aux[top - 1].tipo := tipo_ok; POP(1)}
+                
+                elif (X == "AS61"):                    
+                    # {if (Aux[top - 2].tipo != bool) then error() else Aux[top - 5].tipoRetorno := Aux[top].tipoRetorno; POP(5)}
+                
+                elif (X == "AS71"):                    
+                    # {if (Aux[top - 5].tipo != bool && Aux[top - 1].tipo != tipo_ok) then error() else Aux[top - 8].tipo := tipo_ok && Aux[top - 8].tipoRetorno := Aux[top - 1].tipoRetorno; POP(8)}
+                
+                elif (X == "AS81"):                    
+                    # {AS81: insertaTipo(Aux[top], TSx, Aux[top - 1].tipo); POP(3)}
+                
+                elif (X == "AS91"):                    
+                    # {id.tipo := buscaTipo(Aux[top - 1]) if (id.tipo != null) then if (id.tipo == Aux[top].tipo) then Aux[top - 2].tipo := tipo_ok else if (Aux[top].tipo == tipo_ok) then Aux[top - 2].tipo := tipo_ok else error() else error(); POP(2)}
+                
+                elif (X == "AS101"):                    
+                    # {Aux[top - 4].tipo := tipo_ok; POP(4)}   
+                
+                elif (X == "AS111"):                    
+                    # {p := buscaTipo(Aux[top - 1]) if (p == int || p == chars) then Aux[top - 4].tipo := tipo_ok else error(); POP(4)}
+                
+                elif (X == "AS121"):                    
+                    # {Aux[top - 2].tipo := tipo_ok && Aux[top - 2].tipoRetorno := Aux[top].tipoRetorno; POP(2)}
+                
+                elif (X == "AS131"):                    
+                    # {insertaTipo(Aux[top], TS, tipo_funcion) insertaTipoRetorno(Aux[top], TS, Aux[top - 1].tipo)}
+                elif (X == "AS132"):
+                    # {insertaParams(Aux[top - 3], TS, Aux[top - 1]) TSL = newTable()}
+                elif (X == "AS133"):
+                    # {if (Aux[top - 1].tipoRetorno != Aux[top - 9].tipo) then error() else destroyTable(TSL); POP(10)}
+
+                elif (X == "AS141"):
+                    # {if (Aux[top].tipo == tipo_ok) then Aux[top - 2].tipo := tipo_ok else error(); POP(2)}
+                
+                elif (X == "AS151"):                    
+                    # {Aux[top].tipo := tipo_ok}
+                
+                elif (X == "AS161"):                    
+                    # {Aux[top - 2].tipo := Aux[top]; POP(2)}   
+                
+                elif (X == "AS171"):                    
+                    # {Aux[top - 2].tipo := Aux[top]; POP(2)}   
+                
+                elif (X == "AS181"):                    
+                    # {Aux[top - 3].tipo := Aux[top - 1].tipo; POP(3)}
+                
+                elif (X == "AS191"):                    
+                    # {if (Aux[top].tipo == tipo_ok && Aux[top - 2].tipo == tipo_ok then (Aux[top - 3].tipo := tipo_ok && Aux[top - 3].tipoRetorno := Aux[top - 2].tipoRetorno) else error(); POP(3)}
+                
+                elif (X == "AS201"):                    
+                    #{if (Aux[top].tipo == tipo_ok && Aux[top - 2].tipo == tipo_ok then Aux[top - 3].tipo := tipo_ok else error(); POP(3)}
+                
+                elif (X == "AS221"):                    
+                    #{Aux[top].tipo := tipo_ok}    
+                
+                elif (X == "AS231"):                    
+                    #{if (Aux[top].tipo == tipo_ok) then Aux[top - 2].tipo := Aux[top - 1].tipo else Aux[top - 2].tipo := Aux[top - 1].tipo x Aux[top]; POP(2)}
+                
+                elif (X == "AS241"):                    
+                    #{Aux[top].tipo := tipo_ok}
+                
+                elif (X == "AS251"):                    
+                    #{Aux[top - 1].tipo := Aux[top].tipo; POP(1)}
+                
+                elif (X == "AS261"):                    
+                    #{Aux[top].tipo := tipo_ok}
+                
+                elif (X == "AS271"):                    
+                    #{if (Aux[top].tipo == tipo_ok) then Aux[top - 2].tipo := Aux[top - 1].tipo else Aux[top - 2].tipo := Aux[top].tipo); POP(2)}
+                
+                elif (X == "AS381"):                    
+                    # {if (Aux[top - 1].tipo == bool) then if (Aux[top].tipo == bool || tipo_ok) then bool else error(ASem, linea, “Tipo no aceptado”) else error(ASem, linea, “Tipo no aceptado”); POP(3)}
+                
+                elif (X == "AS391"):                    
+                    #{Aux[top].tipo := tipo_ok}
+                
+                elif (X == "AS301"):                    
+                    #{if (Aux[top - 1].tipo == int && Aux[top].tipo == bool) then Aux[top - 2].tipo := bool elif (Aux[top].tipo == tipo_ok) then Aux[top - 2].tipo := Aux[top - 1].tipo else error(); POP(2)}
+                
+                elif (X == "AS311"):                    
+                    #{if (Aux[top - 1].tipo == bool) then if (Aux[top].tipo == bool || tipo_ok) then bool else error(ASem, linea, “Tipo no aceptado”) else error(ASem, linea, “Tipo no aceptado”); POP(3)}
+                
+                elif (X == "AS321"):                    
+                    # {Aux[top].tipo := tipo_ok}
+                
+                elif (X == "AS331"):                    
+                    #{if (Aux[top - 1].tipo == int && Aux[top].tipo == bool) then Aux[top - 2].tipo := bool elif (Aux[top].tipo == tipo_ok) then Aux[top - 2].tipo := Aux[top - 1].tipo else error(); POP(2)}
+                
+                elif (X == "AS341"):                    
+                    #{if (Aux[top - 1].tipo == bool) then if (Aux[top].tipo == bool || tipo_ok) then bool else error(ASem, linea, “Tipo no aceptado”) else error(ASem, linea, “Tipo no aceptado”); POP(3)}
+                
+                elif (X == "AS351"):                    
+                    #{Aux[top].tipo := tipo_ok}
+                
+                elif (X == "AS361"):                    
+                    #{if (Aux[top].tipo == tipo_ok) then Aux[top - 2].tipo := Aux[top - 1].tipo elif (Aux[top].tipo == int && Aux[top - 1].tipo == int) then Aux[top - 2].tipo := int else error(ASem, linea, “Tipo no aceptado”); POP(2)}    
+                
+                elif (X == "AS371"):                    
+                    #{if (Aux[top].tipo == tipo_ok || int) && (Aux[top - 1].tipo == int) then Aux[top - 3] := int else error(ASem, linea, “Tipo no aceptado”); POP(3)}                    
+
+                elif (X == "AS381"):
+                    #{Aux[top].tipo := tipo_ok}
+                    self.pila_aux.setAtributoTipo("tipo_ok",0)
+
+                elif (X == "AS391"):
+                    #{if (Aux[top].tipo == tipo_ok) then 
+                    #Aux[top - 2].tipo := Aux[top - 1].tipo 
+                    #elif (Aux[top].tipo == int && Aux[top - 1].tipo == int) 
+                    #then Aux[top - 2].tipo := int 
+                    #else error(ASem, linea, Tipo no aceptado); POP(2)}
+                    if (self.pila_aux.getAtributoTipo(0) == "tipo_ok"):
+                        self.pila_aux.setAtributoTipo(self.pila_aux.getAtributoTipo(1),2)
+                    elif ((self.pila_aux.getAtributoTipo(0) == "int") and (self.pila_aux.getAtributoTipo(1) == "int")):
+                        self.pila_aux.setAtributoTipo("tipo_int",2)
+                    else:
+                        error("SEMANTICO", self.AL.n_cr, "Tipo no aceptado")
+
+                elif (X == "AS401"):
+                    #{if (Aux[top].tipo == tipo_ok || int) && (Aux[top - 1].tipo == int) then 
+                    #Aux[top - 3] := int else error(ASem, linea, Tipo no aceptado); POP(3)}
+                    if ((self.pila_aux.getAtributoTipo(0) == "tipo_ok" or self.pila_aux.getAtributoTipo(0) == "int") and (self.pila_aux.getAtributoTipo(1) == "int")):
+                        self.pila_aux.setAtributoTipo("int",3)
+                    else:
+                        error("SEMANTICO", self.AL.n_cr, "Tipo no aceptado")
+                    self.pila_aux.pop()
+
+                elif (X == "AS411"):
+                    #{Aux[top].tipo := tipo_ok; POP(1)}
+                    self.pila_aux.setAtributoTipo("tipo_ok",0)
+                    self.pila_aux.pop()
+
+                elif (X == "AS421"):
+                    #{Aux[top - 1].tipo := int; POP(1)}
+                    self.pila_aux.setAtributoTipo("int",1)
+                    self.pila_aux.pop()
+
+                elif (X == "AS431"):
+                    #{Aux[top - 1].tipo := chars; POP(1)}
+                    self.pila_aux.setAtributoTipo("chars",1)
+                    self.pila_aux.pop()
+
+                elif (X == "AS441"):
+                    #{Aux[top - 1].tipo := bool; POP(1)}
+                    self.pila_aux.setAtributoTipo("bool",1)
+                    self.pila_aux.pop()
+
+                elif (X == "AS451"):
+                    #{if (getAtributoTipo(Aux[top - 1]) == tipo_funcion) 
+                    #then Aux[top - 2].tipo := getAtributoRetorno(Aux[top - 1]) 
+                    #else Aux[top - 2].tipo :=getAtributoTipo(Aux[top - 1]); POP(2)}
+                    if (self.pila_aux.getAtributoTipo(1) == "tipo_funcion"):
+                        self.pila_aux.setAtributoTipo(self.pila_aux.getAtributoRetorno(1),2)
+                    else:
+                        self.pila_aux.setAtributoTipo(self.pila_aux.getAtributoTipo(1),2)
+                    self.pila_aux.pop()
+                    self.pila_aux.pop()
+                elif (X == "AS461"):
+                    #{Aux[top] := tipo_ok}
+                    self.pila_aux.setAtributoTipo("tipo_ok",0)
+                elif (X == "AS471"):
+                    #{Aux[top - 3].tipo := Aux[top - 1]; POP(3)}
+                    self.pila_aux.setAtributoTipo(self.pila_aux.getAtributoTipo(1),3)
+                    self.pila_aux.pop()
+                    self.pila_aux.pop()
+                    self.pila_aux.pop()
+
+                elif (X == "AS481"):
+                    #{if (Aux[top].tipo == tipo_ok) then Aux[top - 3].tipo := 
+                    #Aux[top - 2].tipo else Aux[top - 3].tipo := Aux[top - 2].tipo x Aux[top]; POP(3)}
+                    if (self.pila_aux.getAtributoTipo(0) == "tipo_ok"):
+                        self.pila_aux.setAtributoTipo(self.pila_aux.getAtributoTipo(2),3)
+                    else:
+                        #ojo
+                        self.pila_aux.setAtributoTipo([self.pila_aux.getAtributoTipo(2),self.pila_aux.getAtributoTipo(0)],3)
+                    self.pila_aux.pop()
+                    self.pila_aux.pop()
+                    self.pila_aux.pop()
+                     
+                elif (X == "AS491"):
+                    #{Aux[top] := tipo_ok}
+                    self.pila_aux.setAtributoTipo("tipo_ok",0)                                        
+
+                elif (X == "AS501"):
+                    #{Aux[top] := tipo_ok}
+                    self.pila_aux.setAtributoTipo("tipo_ok",0)                                                            
+
+                elif (X == "AS511"):                    
+                    #if (Aux[top].tipo == tipo_ok) then Aux[top - 4].tipo := 
+                    #Aux[top - 2].tipo else Aux[top - 4].tipo := Aux[top - 2].tipo x Aux[top]; POP(4)}
+                    if (self.pila_aux.getAtributoTipo(0) == "tipo_ok"):
+                        self.pila_aux.setAtributoTipo(self.pila_aux.getAtributoTipo(2),4)
+                    else:
+                        #ojo
+                        self.pila_aux.setAtributoTipo([self.pila_aux.getAtributoTipo(2),self.pila_aux.getAtributoTipo(0)],3)
+                    self.pila_aux.pop()
+                    self.pila_aux.pop()
+                    self.pila_aux.pop()  
+                    self.pila_aux.pop()  
+
+                elif (X == "AS521"):
+                    #{if (Aux[top].tipo == tipo_ok) then Aux[top - 3].tipo := 
+                    #Aux[top - 1].tipo else Aux[top - 3].tipo := Aux[top - 1].tipo x Aux[top]; POP(3)}
+                    if (self.pila_aux.getAtributoTipo(0) == "tipo_ok"):
+                        self.pila_aux.setAtributoTipo(self.pila_aux.getAtributoTipo(1),3)
+                    else:
+                        #ojo
+                        self.pila_aux.setAtributoTipo([self.pila_aux.getAtributoTipo(1),self.pila_aux.getAtributoTipo(0)],3)
+                    self.pila_aux.pop()
+                    self.pila_aux.pop()
+                    self.pila_aux.pop()
+
+                elif (X == "AS531"):
+                    #{Aux[top] := tipo_ok}
+                    self.pila_aux.setAtributoTipo("tipo_ok",1)                                        
+                elif (X == "AS541"):
+                    #{Aux[top - 1] := bool); POP(1)}
+                    self.pila_aux.setAtributoTipo("bool",1)                    
+                    self.pila_aux.pop()
+
+                elif (X == "AS551"):
+                    #{Aux[top - 1] := int); POP(1)}
+                    self.pila_aux.setAtributoTipo("int",1)                    
+                    self.pila_aux.pop()
+
+                elif (X == "AS561"):
+                    #{Aux[top - 1] := chars); POP(1)}
+                    self.pila_aux.setAtributoTipo("chars",1)                    
+                    self.pila_aux.pop()
+
+                elif (X == "AS571"):
+                    #{Aux[top - 1] := Aux[top]; POP(1)}
+                    self.pila_aux.setAtributoTipo(self.pila_aux.getAtributoTipo(0),1)
+                    self.pila_aux.pop()
+
+                elif (X == "AS581"):
+                    self.pila_aux.setAtributoTipo("tipo_ok",0)
+
+                else:
+                    #no deberia entrar nunca aqui
+                    error("SINTACTICO", self.AL.n_cr, "Estructura mal formada")
